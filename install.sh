@@ -32,7 +32,7 @@ printResult() {
 }
 
 installTheme() {
-    THEME_NAME="movie-quotes"
+    THEME_NAME="random-movie-quotes"
     # Welcome message
     echo $GREEN
     cat credits
