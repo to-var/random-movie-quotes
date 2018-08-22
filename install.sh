@@ -40,11 +40,7 @@ installTheme() {
 
     echo "Installing ${THEME_NAME} theme:"
     if cp ${THEME_NAME}.zsh-theme ~/.oh-my-zsh/themes/; then
-        if cp ${THEME_NAME}.txt ~/.oh-my-zsh/themes/; then
-            printResult true "$STEP_1"
-        else
-            printResult false "$STEP_1"
-        fi
+        printResult true "$STEP_1"
     else
         printResult false "$STEP_1"
     fi
