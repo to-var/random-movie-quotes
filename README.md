@@ -21,10 +21,10 @@ ZSH_THEME="random-movie-quotes"
 ```
 
 ## Preview
-![](https://raw.github.com/tmjoseantonio/random-movie-quotes/master/img/random-movie-quote.gif)
+![Preview](https://raw.github.com/tmjoseantonio/random-movie-quotes/master/img/random-movie-quote.gif)
 
 ## Git dirty
-![](https://raw.github.com/tmjoseantonio/random-movie-quotes/master/img/git-clean-dirty.gif)
+![Git dirty](https://raw.github.com/tmjoseantonio/random-movie-quotes/master/img/git-clean-dirty.gif)
 
 
 ## About the author:
