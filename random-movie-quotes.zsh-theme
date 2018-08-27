@@ -49,7 +49,6 @@ declare -a quotes=(
   "Frankly, my dear, I don't give a damn"
   "They call it a Royale with Cheese"
   "Say 'what' again. Say 'what' again, I dare you, I double dare you motherfucker, say what one more Goddamn time!"
-  ""
 )
 
 local host_name="
