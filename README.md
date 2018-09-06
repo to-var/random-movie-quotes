@@ -1,5 +1,5 @@
 # Random movie quote ZSH Theme
-A simple theme for *oh-my-zsh*
+A simple theme for *zsh*
 
 ## Installation
 
