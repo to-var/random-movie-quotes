@@ -57,13 +57,17 @@ installTheme() {
     fi
 
     if [ $SUCCESS_COUNT == $SUCCESS_EXPECTED ]; then
-        echo "\nTheme ${THEME_NAME} has benn successfully"
-        echo "installed! it should be available when you"
-        echo "open a new terminal window"
+        echo "\nTheme ${THEME_NAME} has been"
+        echo "successfully installed!"
+        echo "to start using this theme run:"
+        echo $ORANGE
+        echo "source ~/.zshrc"
+        echo $NC
+        echo "or open a new terminal tab/window"
     else
         echo "\nIt looks like there was an error"
         echo "please feel free to post an issue on:"
-        echo "https://github.com/tmjoseantonio/shrug-zsh-theme/issues/new"
+        echo "https://github.com/tmjoseantonio/random-movie-quotes/issues/new"
     fi
 
     echo "------------------------------------------"
