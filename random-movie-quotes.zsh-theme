@@ -58,7 +58,7 @@ local movies=( \
   "Poltergeist" \
   "Scarface" \
   "The Princess Bride" \
-  "The Shine" \
+  "The Shining" \
   "Star Trek" \
   "Toy Story" \
   "The Matrix" \
