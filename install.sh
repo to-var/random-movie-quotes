@@ -35,7 +35,7 @@ installTheme() {
     printf "\\e%s %s""$GREEN $(cat credits)"
     printf "\\e%s""$NC"   
     printf "\\nInstalling %s theme:""$THEME_NAME"
-    if cp $THEME_NAME.zsh-theme ~/.oh-my-zsh/themes/; then
+    if cp $THEME_NAME.zsh-theme ~/.oh-my-zsh/themes/ && cp -r $THEME_NAME-data ~/.oh-my-zsh/themes/; then
         printResult true "$STEP_1"
     else
         printResult false "$STEP_1"
