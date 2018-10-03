@@ -29,13 +29,12 @@ printResult() {
         printf "\\e%s%s \\e%s%s""$RED $FAIL $NC $2"
     fi
 }
-
 installTheme() {
     THEME_NAME="random-movie-quotes"
     # Welcome message
-    printf "\\e%s%s\\r""$GREEN $(cat credits)"
-
-    printf "\\e%s Installing %s theme:""$NC $THEME_NAME"
+    printf "\\e%s %s""$GREEN $(cat credits)"
+    printf "\\e%s""$NC"   
+    printf "\\nInstalling %s theme:""$THEME_NAME"
     if cp $THEME_NAME.zsh-theme ~/.oh-my-zsh/themes/; then
         printResult true "$STEP_1"
     else
