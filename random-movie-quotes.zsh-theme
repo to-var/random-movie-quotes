@@ -1,5 +1,13 @@
 RED="\033[0;31m"
 GREEN="\033[0;32m"
+CURRENT_BG='NONE'
+PRIMARY_FG=black
+DIR_BG=white
+GIT_CLEAN_BG=green
+GIT_DIRTY_BG=yellow
+
+SEGMENT_SEPARATOR=">"
+PLUSMINUS="\u00b1"
 
 local quotes=( \
   "\"Beetlejuice, Beetlejuice, Beetlejuice!\"" \
@@ -103,24 +111,103 @@ local movies=( \
   "Pulp Fiction" \
 )
 
-local rndm_quote="$((RANDOM % ${#quotes[@]}))"
-local host_name="
-%{$fg_bold[cyan]%}${quotes[${rndm_quote}]}%{$reset_color%} - ${movies[${rndm_quote}]}
-"
-local path_string="%{$fg[cyan]%}%~%{$reset_color%}"
-local prompt_string="$"
-local return_status="%(?:%{$fg_bold[green]%}$prompt_string:%{$fg[red]%}$prompt_string)"
-
-PROMPT='${host_name} $(git_custom_prompt) ${return_status} %{$reset_color%} $(git_remote_status)'
-RPROMPT='%U$path_string%u'
 ZSH_THEME_GIT_PROMPT_PREFIX="["
 ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="$fg[red]✘%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="$fg[green]✔%{$reset_color%}"
 
-git_custom_prompt() {
+# Move prompt
+prompt_movie() {
+  rndm_quote="$((RANDOM % ${#quotes[@]}))"
+  echo "
+    🎬 %{$fg_bold[cyan]%}${quotes[${rndm_quote}]}%{$reset_color%} - ${movies[${rndm_quote}]}
+    "
+}
+
+# Segment separator in promt
+prompt_segment() {
+  local bg fg
+  [[ -n $1 ]] && bg="%K{$1}" || bg="%k"
+  [[ -n $2 ]] && fg="%F{$2}" || fg="%f"
+  if [[ $CURRENT_BG != 'NONE' && $1 != $CURRENT_BG ]]; then
+    print -n "%{$bg%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR%{$fg%}"
+  else
+    print -n "%{$bg%}%{$fg%}"
+  fi
+  CURRENT_BG=$1
+  [[ -n $3 ]] && print -n $3
+}
+
+# Git prompt with dirty status colour
+prompt_git() {
   local branch=$(current_branch)
   if [ -n "$branch" ]; then
-    echo "$ZSH_THEME_GIT_PROMPT_PREFIX$branch$ZSH_THEME_GIT_PROMPT_SUFFIX $(parse_git_dirty)"
+    local color ref
+    is_dirty() {
+      test -n "$(git status --porcelain --ignore-submodules)"
+    }
+    ref="$vcs_info_msg_0_"
+    if [[ -n "$ref" ]]; then
+      if is_dirty; then
+        color=$GIT_DIRTY_BG
+        ref="${ref} $PLUSMINUS"
+      else
+        color=$GIT_CLEAN_BG
+        ref="${ref} "
+      fi
+      if [[ "${ref/.../}" == "$ref" ]]; then
+        ref="$BRANCH $ref"
+      else
+        ref="$DETACHED ${ref/.../}"
+      fi
+      prompt_segment $color $PRIMARY_FG "$ZSH_THEME_GIT_PROMPT_PREFIX$branch$ZSH_THEME_GIT_PROMPT_SUFFIX $(parse_git_dirty) "
+    fi
   fi
 }
+
+# Current working directory in prompt
+prompt_dir() {
+  CURRENT_BG=$DIR_BG
+  prompt_segment $DIR_BG $PRIMARY_FG ' %~ '
+}
+
+# End the prompt, closing any open segments
+prompt_end() {
+  if [[ -n $CURRENT_BG ]]; then
+    print -n "%{%k%F{$CURRENT_BG}%}$SEGMENT_SEPARATOR"
+  else
+    print -n "%{%k%}"
+  fi
+  print -n "%{%f%}"
+  CURRENT_BG=''
+}
+
+# Main prompt
+prompt_main() {
+  RETVAL=$?
+  CURRENT_BG='NONE'
+  prompt_movie
+  prompt_dir
+  prompt_git
+  prompt_end
+}
+
+prompt_precmd() {
+  vcs_info
+  PROMPT='%{%f%b%k%}$(prompt_main) '
+}
+prompt_setup() {
+  autoload -Uz add-zsh-hook
+  autoload -Uz vcs_info
+
+  prompt_opts=(cr subst percent)
+
+  add-zsh-hook precmd prompt_precmd
+
+  zstyle ':vcs_info:*' enable git
+  zstyle ':vcs_info:*' check-for-changes false
+  zstyle ':vcs_info:git*' formats '%b'
+  zstyle ':vcs_info:git*' actionformats '%b (%a)'
+}
+
+prompt_setup
