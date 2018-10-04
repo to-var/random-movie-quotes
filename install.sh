@@ -23,10 +23,10 @@ THEME_CONFIG_LINE="$(grep -n $ZSH_THEME_OPTION ~/.zshrc -m 1| cut -d: -f 1)"
 printResult() {
     if [ "$1" == true ]; then
         SUCCESS_COUNT=$((SUCCESS_COUNT + 1))
-        printf "\\e%s%s\\e%s%s\\n""$GREEN $OK $NC $2"
+        printf "\n\\e%s%s\\e%s%s\\n""$GREEN $OK $NC $2"
     else
         SUCCESS_COUNT=$((SUCCESS_COUNT - 1))
-        printf "\\e%s%s \\e%s%s""$RED $FAIL $NC $2"
+        printf "\n\\e%s%s \\e%s%s""$RED $FAIL $NC $2"
     fi
 }
 installTheme() {
@@ -51,15 +51,15 @@ installTheme() {
         printResult false "$STEP_2" 
     fi 
     if [[ "$SUCCESS_COUNT" -eq "$SUCCESS_EXPECTED" ]]; then 
-        printf "\\nTheme %s has been" "$THEME_NAME" 
-        printf "successfully installed!" 
-        printf "to start using this theme run:" 
-        printf "\\e%s source ~/.zshrc""$ORANGE"
-        printf "\\e%s or open a new terminal tab/window""$NC"
+        echo "\n\nTheme $THEME_NAME has been"
+        echo "uccessfully installed!" 
+        echo "To start using this theme run:"
+        echo "$ORANGEsource ~/.zshrc$NC"
+        echo "or open a new terminal tab/window"
     else
-        printf "\\nIt looks like there was an error"
-        printf " please feel free to post an issue on:"
-        printf " https://github.com/tmjoseantonio/random-movie-quotes/issues/new"
+        echo "It looks like there was an error"
+        echo "please feel free to post an issue on:"
+        echo "https://github.com/tmjoseantonio/random-movie-quotes/issues/new"
     fi
 
     echo "------------------------------------------"
