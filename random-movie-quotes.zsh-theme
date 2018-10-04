@@ -6,7 +6,7 @@ DIR_BG=white
 GIT_CLEAN_BG=green
 GIT_DIRTY_BG=yellow
 
-SEGMENT_SEPARATOR=">"
+SEGMENT_SEPARATOR=""
 PLUSMINUS="\u00b1"
 
 local quotes=( \
@@ -116,11 +116,11 @@ ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_DIRTY="$fg[red]✘%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN="$fg[green]✔%{$reset_color%}"
 
-# Move prompt
+# Movie  prompt
 prompt_movie() {
   rndm_quote="$((RANDOM % ${#quotes[@]}))"
   echo "
-    🎬 %{$fg_bold[cyan]%}${quotes[${rndm_quote}]}%{$reset_color%} - ${movies[${rndm_quote}]}
+🎬 %{$fg_bold[cyan]%}${quotes[${rndm_quote}]}%{$reset_color%} - ${movies[${rndm_quote}]}
     "
 }
 
