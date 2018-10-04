@@ -1,6 +1,9 @@
 # Random movie quote ZSH Theme
 A simple theme for *zsh*
 
+## How to contribute:
+Check [CONTRIBUTING.md](CONTRIBUTING.md) for instructions.
+
 ## Installation
 
 Easy install (tested on macOS only)
