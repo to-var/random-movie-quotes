@@ -2,7 +2,7 @@
 . ~/.oh-my-zsh/themes/random-movie-quotes-data/quotes.sh
 
 RED="\033[0;31m"
-GREEN="\033[0;31m"
+GREEN="\033[0;32m"
 
 local rndm_quote="$((RANDOM % ${#quotes[@]}))"
 local host_name="
