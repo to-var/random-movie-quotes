@@ -102,16 +102,18 @@ local movies=( \
   "Pulp Fiction" \
   "Pulp Fiction" \
 )
-
 local rndm_quote="$((RANDOM % ${#quotes[@]}))"
-local host_name="
-%{$fg_bold[cyan]%}${quotes[${rndm_quote}]}%{$reset_color%} - ${movies[${rndm_quote}]}
-"
+random_quote() {
+  echo "\n%{$fg_bold[cyan]%}${quotes[${rndm_quote}]}%{$reset_color%} - ${movies[${rndm_quote}]}"
+}
+precmd() {
+  rndm_quote="$((RANDOM % ${#quotes[@]}))"
+}
 local path_string="%{$fg[cyan]%}%~%{$reset_color%}"
 local prompt_string="$"
 local return_status="%(?:%{$fg_bold[green]%}$prompt_string:%{$fg[red]%}$prompt_string)"
 
-PROMPT='${host_name} $(git_custom_prompt) ${return_status} %{$reset_color%} $(git_remote_status)'
+PROMPT='$(random_quote) $(git_custom_prompt) ${return_status} %{$reset_color%} $(git_remote_status)'
 RPROMPT='%U$path_string%u'
 ZSH_THEME_GIT_PROMPT_PREFIX="["
 ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%}"
