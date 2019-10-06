@@ -36,6 +36,7 @@ quotes=( \
   "\"My precious!\"" \
   "\"Wax on, wax off. Wax on, wax off\"" \
   "\"Hakuna Matata!\"" \
+  "\"Remember who you are.\"" \
   "\"Live long and prosper\"" \
   "\"May the Force be with you\"" \
   "\"Hasta la vista…baby\"" \

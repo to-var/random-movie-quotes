@@ -36,6 +36,7 @@ movies=( \
   "The Lord of the Rings: The Fellowship of the Ring" \
   "The Karate Kid" \
   "The Lion King" \
+  "The Lion King" \
   "Star Trek" \
   "Star Wars" \
   "The Terminator" \
