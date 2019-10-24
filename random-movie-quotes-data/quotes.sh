@@ -48,4 +48,5 @@ quotes=( \
   "\"Frankly, my dear, I don't give a damn\"" \
   "\"They call it a Royale with Cheese\"" \
   "\"Say 'what' again. Say 'what' again, I dare you, I double dare you motherfucker, say what one more Goddamn time!\"" \
-)
+  "\"If you're good at something, never do it for free.\"" \
+  )
