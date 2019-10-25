@@ -48,4 +48,5 @@ movies=( \
   "Gone with the wind" \
   "Pulp Fiction" \
   "Pulp Fiction" \
+  "Joker" \
 )
